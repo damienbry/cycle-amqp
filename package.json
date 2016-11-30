@@ -1,0 +1,36 @@
+{
+  "name": "cycle-amqp",
+  "version": "0.1.0",
+  "description": "Brings amqp power to your Cycle.js app !",
+  "main": "index.js",
+  "scripts": {
+    "launch-docker": "docker run -d -p \"5672:5672\" rabbitmq:3 && sleep 5",
+    "is-docker-running": "docker ps | grep rabbitmq || npm run launch-docker",
+    "test": "npm run is-docker-running && mocha driver.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Orbmancer/cycle-amqp.git"
+  },
+  "keywords": [
+    "cycle",
+    "driver",
+    "amqp",
+    "javascript",
+    "stream"
+  ],
+  "author": "Orbmancer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Orbmancer/cycle-amqp/issues"
+  },
+  "homepage": "https://github.com/Orbmancer/cycle-amqp#readme",
+  "dependencies": {
+    "@cycle/xstream-run": "^4.0.0",
+    "amqplib": "^0.5.1",
+    "xstream": "^9.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}
