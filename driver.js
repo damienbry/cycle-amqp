@@ -21,6 +21,7 @@ function makeAMQPDriver(mySettings) {
 
   const connection = amqp.connect('amqp://'+settings.host);
   let activeConnection = null;
+  let activeChannel = null;
 
   assert(settings.inputQueue, 'you must pass inputQueue in parameters to amqpDriver');
   assert(settings.outputQueue, 'you must pass outputQueue in parameters to amqpDriver');
@@ -62,6 +63,7 @@ function makeAMQPDriver(mySettings) {
           })
           .then(conn => conn.createChannel())
           .then(ch => {
+            activeChannel = ch;
             return ch.assertQueue(q, {durable: true}).then(ok => {
               return ch.consume(q, msg => {
                 if (msg !== null) {
@@ -72,7 +74,8 @@ function makeAMQPDriver(mySettings) {
             });
           }).catch(listener.error);
         },
-        stop: () => {
+      stop: () => {
+          activeChannel && activeChannel.close();
           activeConnection && activeConnection.close.bind(activeConnection);
         }
       });

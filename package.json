@@ -1,6 +1,6 @@
 {
   "name": "cycle-amqp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Brings amqp power to your Cycle.js app !",
   "main": "index.js",
   "scripts": {
